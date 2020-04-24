@@ -63,11 +63,11 @@ def query():
 
     cur.execute("SELECT *, oid FROM addresses")
     records = cur.fetchall()
+    
     print(records)
-
     print_records = ""
     for x in records[2]:
-        print_records += str(x) + "\n"
+        print_records += str(x) + "\n" 
 
     query_label = Label(root, text=print_records)
     query_label.grid(row=8, column=0, columnspan=2)
@@ -75,7 +75,18 @@ def query():
     conn.commit()
     conn.close()
 
-    
+def delete():
+    #create or connect to db
+    conn = sqlite3.connect('address_book.db')
+
+    #create cursor
+    cur = conn.cursor()
+
+    #delete record
+    cur.execute("DELETE FROM addresses WHERE oid= " + delete_box.get())
+
+    conn.commit()
+    conn.close()
 
 #Create text boxes
 f_name = Entry(root, width=30)
@@ -90,6 +101,8 @@ state = Entry(root, width=30)
 state.grid(row=4, column=1)
 zipcode = Entry(root, width=30)
 zipcode.grid(row=5, column=1)
+delete_box = Entry(root, width=30)
+delete_box.grid(row=9, column=1)
 
 #Create text box labels
 f_name_label = Label(root, text="First Name")
@@ -104,6 +117,8 @@ state_label = Label(root, text="State")
 state_label.grid(row=4, column=0)
 zipcode_label = Label(root, text="Zipcode")
 zipcode_label.grid(row=5, column=0)
+delete_box_label = Label(root, text="ID Number")
+delete_box_label.grid(row=9, column=0)
 
 #Create Submit btn
 submit_btn = Button(root, text="Add Record to DB", command=submit)
@@ -112,6 +127,10 @@ submit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 #Create Query btn
 query_btn = Button(root, text="Show Records", command=query)
 query_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
+
+#create delete btn
+delete_btn = Button(root, text="Delete Record", command=delete)
+delete_btn.grid(row=10, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
 
 conn.commit()
 
