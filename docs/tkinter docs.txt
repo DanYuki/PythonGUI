@@ -1,0 +1,22 @@
+tkinter docs 
+==============
+
+Meta things
+==============
+from tkinter import *
+root = Tk()
+root.title("Title")
+root.iconbitmap("icon.ico")
+root.geometry("heightxwidth")
+
+Widget things
+==============
+> Frame(parent) 
+> Label(parent, text="")
+> Button(parent, text="displayText", command=functionName)
+> Checkbutton(parent, text="displayText", command=functionName, variable=varName, onvalue=value, offvalue=value)
+> Radiobutton(parent, text="displayText", variable=varName, value=value)
+> Entry(parent)
+> Combobox
+> Dropdownbox
+> Slider
